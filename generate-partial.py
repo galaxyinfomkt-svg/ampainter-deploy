@@ -1,26 +1,51 @@
-<!DOCTYPE html>
+import os
+
+# Top 10 cities only (most important)
+cities = [
+    {"name": "Hudson", "state": "MA", "county": "Middlesex"},
+    {"name": "Marlborough", "state": "MA", "county": "Middlesex"},
+    {"name": "Framingham", "state": "MA", "county": "Middlesex"},
+    {"name": "Natick", "state": "MA", "county": "Middlesex"},
+    {"name": "Sudbury", "state": "MA", "county": "Middlesex"},
+    {"name": "Concord", "state": "MA", "county": "Middlesex"},
+    {"name": "Westborough", "state": "MA", "county": "Worcester"},
+    {"name": "Northborough", "state": "MA", "county": "Worcester"},
+    {"name": "Southborough", "state": "MA", "county": "Worcester"},
+    {"name": "Hopkinton", "state": "MA", "county": "Middlesex"},
+]
+
+services = [
+    {"name": "Interior Painting", "slug": "interior-painting", "desc": "Transform your indoor spaces with expert interior painting services"},
+    {"name": "Exterior Painting", "slug": "exterior-painting", "desc": "Protect and beautify your home's exterior with weather-resistant finishes"},
+    {"name": "Cabinet Refinishing", "slug": "cabinet-refinishing", "desc": "Save 50-70% with professional cabinet painting and refinishing"},
+]
+
+os.makedirs("locations", exist_ok=True)
+
+def get_city_page(city):
+    return f'''<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Painter Near Me in Marlborough, MA | A&M Painter Inc</title>
-    <meta name="description" content="Looking for a painter near me in Marlborough, MA? A&M Painter Inc offers professional painting services in Middlesex County. Interior, exterior, cabinet refinishing. 32+ years experience. Free estimates!">
-    <meta name="keywords" content="painter near me Marlborough, Marlborough painters, painting company Marlborough MA, house painters Marlborough, Middlesex County painters">
-    <link rel="canonical" href="https://ampainterinc.com/locations/marlborough.html">
+    <title>Painter Near Me in {city["name"]}, {city["state"]} | A&M Painter Inc</title>
+    <meta name="description" content="Looking for a painter near me in {city["name"]}, {city["state"]}? A&M Painter Inc offers professional painting services in {city["county"]} County. Interior, exterior, cabinet refinishing. 32+ years experience. Free estimates!">
+    <meta name="keywords" content="painter near me {city["name"]}, {city["name"]} painters, painting company {city["name"]} MA, house painters {city["name"]}, {city["county"]} County painters">
+    <link rel="canonical" href="https://ampainterinc.com/locations/{city["name"].lower().replace(" ", "-")}.html">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
+        tailwind.config = {{
+            theme: {{
+                extend: {{
+                    colors: {{
                         primary: '#E10600',
                         secondary: '#0A1F44',
-                    }
-                }
-            }
-        }
+                    }}
+                }}
+            }}
+        }}
     </script>
 </head>
 <body class="font-sans">
@@ -36,9 +61,9 @@
     <section class="pt-24 pb-16 bg-gradient-to-br from-secondary to-blue-900 text-white">
         <div class="container mx-auto px-4">
             <div class="max-w-4xl mx-auto text-center">
-                <span class="bg-primary/20 px-4 py-2 rounded-full text-sm font-semibold mb-4 inline-block">Painter Near Me in Marlborough</span>
-                <h1 class="text-4xl md:text-6xl font-black mb-6">Professional Painting Services in Marlborough, MA</h1>
-                <p class="text-xl text-gray-200 mb-8">Trusted by homeowners in Middlesex County for over 32 years. Licensed, insured, and committed to excellence.</p>
+                <span class="bg-primary/20 px-4 py-2 rounded-full text-sm font-semibold mb-4 inline-block">Painter Near Me in {city["name"]}</span>
+                <h1 class="text-4xl md:text-6xl font-black mb-6">Professional Painting Services in {city["name"]}, {city["state"]}</h1>
+                <p class="text-xl text-gray-200 mb-8">Trusted by homeowners in {city["county"]} County for over 32 years. Licensed, insured, and committed to excellence.</p>
                 <div class="flex flex-col sm:flex-row gap-4 justify-center">
                     <a href="#quote" class="bg-primary text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-red-700">Get Free Estimate</a>
                     <a href="tel:5086310469" class="border-2 border-white px-8 py-4 rounded-full font-bold text-lg hover:bg-white hover:text-secondary">(508) 631-0469</a>
@@ -50,10 +75,10 @@
     <section class="py-20 bg-white">
         <div class="container mx-auto px-4">
             <div class="max-w-4xl mx-auto">
-                <h2 class="text-3xl md:text-4xl font-black text-secondary mb-8 text-center">Why Marlborough Homeowners Choose A&M Painter Inc</h2>
+                <h2 class="text-3xl md:text-4xl font-black text-secondary mb-8 text-center">Why {city["name"]} Homeowners Choose A&M Painter Inc</h2>
                 <div class="prose prose-lg max-w-none text-gray-700 space-y-6">
-                    <p>When residents of <strong>Marlborough, Massachusetts</strong> search for a <strong>painter near me</strong>, they need a contractor who understands local homes and delivers exceptional results. A&M Painter Inc has been the trusted choice for <strong>painting services in Marlborough</strong> and throughout Middlesex County for over three decades.</p>
-                    <p>Our team of professional <strong>Marlborough painters</strong> brings expertise, reliability, and attention to detail to every project. Whether you need interior painting to refresh your living spaces, exterior painting to boost curb appeal, or cabinet refinishing to transform your kitchen, we deliver results that exceed expectations.</p>
+                    <p>When residents of <strong>{city["name"]}, Massachusetts</strong> search for a <strong>painter near me</strong>, they need a contractor who understands local homes and delivers exceptional results. A&M Painter Inc has been the trusted choice for <strong>painting services in {city["name"]}</strong> and throughout {city["county"]} County for over three decades.</p>
+                    <p>Our team of professional <strong>{city["name"]} painters</strong> brings expertise, reliability, and attention to detail to every project. Whether you need interior painting to refresh your living spaces, exterior painting to boost curb appeal, or cabinet refinishing to transform your kitchen, we deliver results that exceed expectations.</p>
                 </div>
                 <div class="grid md:grid-cols-3 gap-8 mt-12">
                     <div class="text-center p-6 bg-gray-50 rounded-2xl">
@@ -75,15 +100,15 @@
 
     <section class="py-20 bg-gray-50">
         <div class="container mx-auto px-4">
-            <h2 class="text-3xl md:text-4xl font-black text-secondary mb-12 text-center">Our Painting Services in Marlborough</h2>
+            <h2 class="text-3xl md:text-4xl font-black text-secondary mb-12 text-center">Our Painting Services in {city["name"]}</h2>
             <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
                 <div class="bg-white p-8 rounded-2xl shadow-lg">
                     <h3 class="text-xl font-bold text-secondary mb-3">Interior Painting</h3>
-                    <p class="text-gray-600 mb-4">Expert wall, ceiling, and trim painting for homes in Marlborough.</p>
+                    <p class="text-gray-600 mb-4">Expert wall, ceiling, and trim painting for homes in {city["name"]}.</p>
                 </div>
                 <div class="bg-white p-8 rounded-2xl shadow-lg">
                     <h3 class="text-xl font-bold text-secondary mb-3">Exterior Painting</h3>
-                    <p class="text-gray-600 mb-4">Weather-resistant exterior painting for Marlborough homes.</p>
+                    <p class="text-gray-600 mb-4">Weather-resistant exterior painting for {city["name"]} homes.</p>
                 </div>
                 <div class="bg-white p-8 rounded-2xl shadow-lg">
                     <h3 class="text-xl font-bold text-secondary mb-3">Cabinet Refinishing</h3>
@@ -96,14 +121,14 @@
     <section id="quote" class="py-20 bg-secondary">
         <div class="container mx-auto px-4">
             <div class="max-w-2xl mx-auto text-center">
-                <h2 class="text-3xl font-black text-white mb-4">Get Your Free Quote in Marlborough</h2>
+                <h2 class="text-3xl font-black text-white mb-4">Get Your Free Quote in {city["name"]}</h2>
                 <p class="text-gray-300 mb-8">Professional estimate within 24 hours</p>
                 <div class="bg-white rounded-2xl p-6">
                     <iframe
                         src="https://api.leadconnectorhq.com/widget/form/c7kM3Sd6fSoWqz1RZIOK"
                         style="width:100%;height:450px;border:none;"
                         id="inline-c7kM3Sd6fSoWqz1RZIOK"
-                        data-layout='{"id":"INLINE"}'
+                        data-layout='{{"id":"INLINE"}}'
                         data-trigger-type="alwaysShow"
                         data-trigger-value=""
                         data-activation-type="alwaysActivated"
@@ -124,7 +149,7 @@
 
     <section class="py-16 bg-primary">
         <div class="container mx-auto px-4 text-center">
-            <h2 class="text-3xl font-black text-white mb-6">Ready to Transform Your Marlborough Home?</h2>
+            <h2 class="text-3xl font-black text-white mb-6">Ready to Transform Your {city["name"]} Home?</h2>
             <a href="tel:5086310469" class="inline-flex items-center gap-3 bg-white text-secondary px-8 py-4 rounded-full font-bold text-xl hover:bg-gray-100">
                 Call (508) 631-0469
             </a>
@@ -133,8 +158,18 @@
 
     <footer class="bg-secondary text-white py-12">
         <div class="container mx-auto px-4 text-center">
-            <p class="text-gray-400">&copy; 2024 A&M Painter Inc. Professional painting services in Marlborough, MA.</p>
+            <p class="text-gray-400">&copy; 2024 A&M Painter Inc. Professional painting services in {city["name"]}, MA.</p>
         </div>
     </footer>
 </body>
-</html>
+</html>'''
+
+# Generate only city pages (no service subpages to reduce file count)
+print("Generating city pages...")
+for city in cities:
+    filename = f"locations/{city['name'].lower().replace(' ', '-')}.html"
+    with open(filename, 'w', encoding='utf-8') as f:
+        f.write(get_city_page(city))
+    print(f"  Created: {filename}")
+
+print(f"\nGenerated {len(cities)} city pages")
